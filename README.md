@@ -10,5 +10,7 @@ as verilator produces C++ code from verilog, we pretty much have a fast emulator
 
 
 rtl folder contains all verilog files 
+
 tb folder contains tesbench files 
+
 programs folder just contains hex file for rom 
