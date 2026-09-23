@@ -7,7 +7,7 @@ reg [15:0] read_only_mem [255:0];
 
 initial begin 
 
-$readmemh("programs/program.h", read_only_mem);
+$readmemh("programs/program.hex", read_only_mem);
 
 end 
 assign data_out = read_only_mem[address];
