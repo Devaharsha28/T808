@@ -3,7 +3,7 @@ input [7:0] address,
 output [15:0] data_out
 );
 
-reg [15:0] read_only_mem [255:0];
+reg [15:0] read_only_mem [0:255];
 
 initial begin 
 

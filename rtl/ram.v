@@ -8,7 +8,7 @@ module ram(
 
 );
 
-reg [7:0] registers [255:0];
+reg [7:0] registers [0:255];
 
 assign data_out = (enable) ? registers[address] : 8'h00;
 

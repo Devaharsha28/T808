@@ -14,7 +14,11 @@ output [7:0] data_out
 
 reg [7:0] register;
 
-assign data_out <= register ;
+assign data_out = register ;
+
+initial begin register = 8'h00; end 
+
+
 always @(posedge clk) begin 
 
 if(write_enable & ~enable_shift) begin register = data; end 
