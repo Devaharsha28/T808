@@ -28,6 +28,7 @@ T808 is an 8-bit accumulator-based Harvard CPU.
 The operand can be an immediate value, RAM address, or jump offset depending on the instruction.
 
 ## Ports
+These ports are direct extensions from the ram addresses and can be modifed by mov instruction js like any other memory address .
 |Port | RAM address|
 | --- | --- |
 | port 1 | 0xfc |
