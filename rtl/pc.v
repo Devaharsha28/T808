@@ -13,7 +13,7 @@ output [7:0] address
 reg [7:0] state;
 
 
-initial begin state <= 8'h00 ; end 
+initial begin state = 8'h00 ; end 
 
 assign address = state;
 

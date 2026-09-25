@@ -21,7 +21,7 @@ initial begin register = 8'h00; end
 
 always @(posedge clk) begin 
 
-if(write_enable & ~enable_shift) begin register = data; end 
+if(write_enable & ~enable_shift) begin register <= data; end 
 
 if (write_enable & enable_shift) begin 
 

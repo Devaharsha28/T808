@@ -18,6 +18,94 @@ programs folder just contains hex file for rom
 builds folder contains compiled files and is ignored by git
 
 
+
+## running with verilator
+
+the cpu can also be compiled and run using verilator with a C++ testbench.
+
+verilator converts the verilog cpu into C++ code and the C++ testbench is used to control the cpu clock and read its outputs.
+
+the verilator testbench is in
+
+```
+tb/cpu_tb.cpp
+```
+
+first put the program you want to run in
+
+```
+programs/program.hex
+```
+
+then compile the cpu and C++ testbench using
+
+```bash
+verilator --cc --exe --build \
+    --Mdir Verilator_files \
+    --top-module cpu \
+    rtl/*.v \
+    tb/cpu_tb.cpp
+```
+
+`--cc` tells verilator to generate a C++ model from the verilog files.
+
+`--exe` tells verilator that we also have a C++ file which will be used with the generated model.
+
+`--build` tells verilator to compile everything and create the executable.
+
+`--Mdir Verilator_files` tells verilator to put the generated and compiled files inside the `Verilator_files` folder.
+
+`--top-module cpu` tells verilator that `cpu` is the top level module.
+
+after compilation the generated files will be inside
+
+```
+Verilator_files/
+```
+
+for ubuntu based systems the compiled cpu executable will be
+
+```
+Verilator_files/Vcpu
+```
+
+and can be run using
+
+```bash
+./Verilator_files/Vcpu
+```
+
+the C++ testbench generates the clock and calls `eval()` whenever the cpu inputs change.
+
+for example
+
+```cpp
+cpu.clk = 0;
+cpu.eval();
+
+cpu.clk = 1;
+cpu.eval();
+```
+
+the change from `0` to `1` creates a positive clock edge, which makes the cpu execute a clock cycle.
+
+the testbench can also read outputs exposed by the cpu and print the current state.
+
+example output
+
+```text
+| acc = 05 | pc = 01 | inst = 0A80 |
+| p1 = 00 | p2 = 00 | p3 = 00 | p4 = 00 |
+```
+
+the cpu still loads its program from
+
+```
+programs/program.hex
+```
+
+so changing the program does not require changing the C++ testbench.
+
 ## running with iverilog
 
 for now the cpu can be compiled and tested using iverilog.
@@ -119,3 +207,4 @@ and leaves
 ```text
 ACC = 07
 ```
+

@@ -13,6 +13,7 @@ T808 is an 8-bit accumulator-based Harvard CPU.
 - 8-bit program counter
 - Harvard architecture
 - Fixed-width instructions
+- 4 Memory-mapped ports
 
 ## Instruction Format
 
@@ -25,6 +26,15 @@ T808 is an 8-bit accumulator-based Harvard CPU.
 ```
 
 The operand can be an immediate value, RAM address, or jump offset depending on the instruction.
+
+## Ports
+|Port | RAM address|
+| --- | --- |
+| port 1 | 0xfc |
+| port 2 | 0xfd |
+| port 3 | 0xfe |
+| port 4 | 0xff |
+
 
 ## ISA
 

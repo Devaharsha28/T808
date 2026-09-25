@@ -1,8 +1,16 @@
 module cpu(
 input enable,
 input clk,
-input pc_clr
+input pc_clr,
 
+
+output [7:0] accumulator,
+output [7:0] program_counter,
+output [15:0] rom_output,
+output [7:0] port1,
+output [7:0] port2,
+output [7:0] port3,
+output [7:0] port4
 );
 
 //Accumulator wires 
@@ -44,8 +52,14 @@ wire [15:0] rom_data_out;
 acc ACC ( acc_data_in , acc_write_enable , acc_enable_shift , acc_sel, clk , acc_data_out);
 alu ALU (alu_input_a , alu_input_b , alu_sel , alu_output  , carry_flag , n_flag , alu_z_flag );
 pc PC ( pc_offset , activate_jmp , pc_mode , pc_clr , clk , pc_address );
-ram RAM ( ram_enable , ram_address,  ram_data_in , ram_write_enable , ram_data_out);
+ram RAM ( ram_enable , ram_address,  ram_data_in , ram_write_enable , ram_data_out, port1 , port2 , port3, port4);
 rom ROM ( pc_address , rom_data_out);
+
+//cpu outputs definitions 
+assign accumulator = acc_data_out;
+assign program_counter = pc_address ;
+assign rom_output = rom_data_out;
+
 
 always @(*) begin 
     
