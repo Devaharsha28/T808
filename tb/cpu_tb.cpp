@@ -35,7 +35,7 @@ cpu.eval();
 cpu.clk = 1;
 cpu.eval();
 print_state(cpu.accumulator , cpu.program_counter , cpu.rom_output,  cpu.port1 , cpu.port2 , cpu.port3, cpu.port4 );
-usleep(500000);
+usleep(50000);
 
 }
 

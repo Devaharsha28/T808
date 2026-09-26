@@ -5,11 +5,15 @@
 const int WIDTH = 600;
 const int HEIGHT = 600;
 
+
 int main (int argc, char* argv[]){
 
 SDL_Window* window = NULL;
 SDL_Surface* surface = NULL;
-SDL_Rect square = { 250, 250, 50, 50};
+SDL_Rect square = { 250, 250, 100, 50};
+
+
+
 if( SDL_Init(SDL_INIT_VIDEO) < 0){
 printf("Init fked up yo!! < %s >\n", SDL_GetError());
 }
