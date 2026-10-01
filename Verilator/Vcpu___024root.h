@@ -47,6 +47,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vcpu___024root final : public VerilatedModule
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<CData/*7:0*/, 256> cpu__DOT__RAM__DOT__registers;
     VlUnpacked<SData/*15:0*/, 256> cpu__DOT__ROM__DOT__read_only_mem;
+    std::string cpu__DOT__ROM__DOT__rom_file;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VicoTriggered;
     VlTriggerVec<2> __VactTriggered;

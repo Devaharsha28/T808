@@ -17,7 +17,10 @@ printf("_______________________________________________\n");
 
 
 
-int main(){
+int main(int argc , char** argv){
+
+
+Verilated::commandArgs(argc, argv);
 
 Vcpu cpu;
 

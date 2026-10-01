@@ -18,7 +18,7 @@ Vcpu__Syms::Vcpu__Syms(VerilatedContext* contextp, const char* namep, Vcpu* mode
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(69);
+        Verilated::stackCheck(49);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);

@@ -31,18 +31,17 @@ VL_ATTR_COLD void Vcpu___024root___eval_initial__TOP(Vcpu___024root* vlSelf) {
     Vcpu__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vcpu___024root___eval_initial__TOP\n"); );
     auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Init
-    VlWide<5>/*159:0*/ __Vtemp_1;
     // Body
     vlSelfRef.cpu__DOT__acc_data_in = 0U;
     vlSelfRef.cpu__DOT__ACC__DOT__register = 0U;
     vlSelfRef.cpu__DOT__PC__DOT__state = 0U;
-    __Vtemp_1[0U] = 0x2e686578U;
-    __Vtemp_1[1U] = 0x6772616dU;
-    __Vtemp_1[2U] = 0x2f70726fU;
-    __Vtemp_1[3U] = 0x72616d73U;
-    __Vtemp_1[4U] = 0x70726f67U;
-    VL_READMEM_N(true, 16, 256, 0, VL_CVT_PACK_STR_NW(5, __Vtemp_1)
+    if (VL_UNLIKELY((! VL_VALUEPLUSARGS_INN(64, std::string{"ROM=%s"}, 
+                                            vlSelfRef.cpu__DOT__ROM__DOT__rom_file)))) {
+        VL_WRITEF_NX("bro give rom file with +ROM=whatever.hex\n",0);
+        VL_FINISH_MT("rtl/rom.v", 14, "");
+    }
+    VL_WRITEF_NX("loading rom: %@\n",0,-1,&(vlSelfRef.cpu__DOT__ROM__DOT__rom_file));
+    VL_READMEM_N(true, 16, 256, 0, VL_CVT_PACK_STR_NN(vlSelfRef.cpu__DOT__ROM__DOT__rom_file)
                  ,  &(vlSelfRef.cpu__DOT__ROM__DOT__read_only_mem)
                  , 0, ~0ULL);
 }
