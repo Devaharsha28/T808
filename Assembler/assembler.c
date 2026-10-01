@@ -199,10 +199,10 @@ char* opcode_hex(char* instruction){
 
 if(strcmp(instruction, "NOP") == 0) return "00";
 if(strcmp(instruction, "ADDI") == 0) return "01";
-if(strcmp(instruction, "SUB1") == 0) return "02";
+if(strcmp(instruction, "SUBI") == 0) return "02";
 if(strcmp(instruction, "ANDI") == 0) return "03";
-if(strcmp(instruction, "XOR1") == 0) return "04";
-if(strcmp(instruction, "ORR1") == 0) return "05";
+if(strcmp(instruction, "XORI") == 0) return "04";
+if(strcmp(instruction, "ORRI") == 0) return "05";
 if(strcmp(instruction, "NOT") == 0) return "06";
 
 if(strcmp(instruction, "JMPA") == 0) return "07";
