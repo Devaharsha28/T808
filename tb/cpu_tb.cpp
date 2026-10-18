@@ -21,7 +21,15 @@ int main(int argc , char** argv){
 
 
 Verilated::commandArgs(argc, argv);
+ int sleep_time = 50000; 
 
+    // search command line arguments for "+DELAY="
+    const char* delay_arg = Verilated::commandArgsPlusMatch("DELAY=");
+    // delay_arg will point to something like "+DELAY=50000"
+    if (delay_arg && delay_arg[0] != '\0') {
+        // skip the "+DELAY=" text (7 characters) and get num
+        sleep_time = atoi(delay_arg + 7);
+    }
 Vcpu cpu;
 
 int running = 1;
@@ -38,7 +46,7 @@ cpu.eval();
 cpu.clk = 1;
 print_state(cpu.accumulator , cpu.program_counter , cpu.rom_output,  cpu.port1 , cpu.port2 , cpu.port3, cpu.port4 );
 cpu.eval();
-usleep(50000);
+usleep(sleep_time);
 
 }
 

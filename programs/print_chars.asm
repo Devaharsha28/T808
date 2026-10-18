@@ -1,0 +1,8 @@
+.label START
+MVI 00
+MOV FC
+
+.label NEXT
+ADDI 01
+MOV FC
+JMP NEXT
