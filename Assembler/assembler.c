@@ -101,7 +101,8 @@ int main(int argc , char* args[]){
         if(strcmp(opcode, ".label") == 0) continue;
 
         // Jump instruction conversion block
-        if(strcmp(opcode, "JMP") == 0 || strcmp(opcode, "JZ") == 0 || strcmp(opcode, "JNZ") == 0){
+        if(strcmp(opcode, "JMP") == 0 || strcmp(opcode, "JZ") == 0 || strcmp(opcode, "JNZ")  == 0|| strcmp(opcode, "JC") == 0
+           || strcmp(opcode, "JNC") == 0 || strcmp(opcode, "JE") == 0 || strcmp(opcode, "JNE") == 0){
             int found = 0;
             for(int i = 0; i < label_count; i++){
                 if(strcmp(operand, labels[i].name) == 0){
@@ -113,13 +114,22 @@ int main(int argc , char* args[]){
                         if(strcmp(opcode, "JMP") == 0) strcpy(opcode, "JMPA");
                         else if(strcmp(opcode, "JZ") == 0) strcpy(opcode, "JZA");
                         else if(strcmp(opcode, "JNZ") == 0) strcpy(opcode, "JNZA");
-                    }
+                        else if(strcmp(opcode, "JC") == 0) strcpy(opcode , "JCA");
+			else if(strcmp(opcode, "JNC") == 0) strcpy(opcode , "JNCA");
+			else if(strcmp(opcode, "JE") == 0) strcpy(opcode , "JEA");
+                        else if(strcmp(opcode, "JNE") == 0) strcpy(opcode , "JNEA");
+			}
                     else { // Backward jump or same address
                         offset = address - labels[i].address;
                         if(strcmp(opcode, "JMP") == 0) strcpy(opcode, "JMPS");
                         else if(strcmp(opcode, "JZ") == 0) strcpy(opcode, "JZS");
                         else if(strcmp(opcode, "JNZ") == 0) strcpy(opcode, "JNZS");
-                    }
+               		else if(strcmp(opcode, "JC") == 0) strcpy(opcode , "JCS");
+                        else if(strcmp(opcode, "JNC") == 0) strcpy(opcode , "JNCS");
+                        else if(strcmp(opcode, "JE") == 0) strcpy(opcode , "JES");
+                        else if(strcmp(opcode, "JNE") == 0) strcpy(opcode , "JNES");
+
+			}
 
                     if(offset > 255){
                         printf("jump too far bro , %d doesnt fit in 8 bits\n", offset);
@@ -178,5 +188,13 @@ char* opcode_hex(char* instruction){
     if(strcmp(instruction, "MVA") == 0) return "16";
     if(strcmp(instruction, "JNZA") == 0) return "17";
     if(strcmp(instruction, "JNZS") == 0) return "18";
+    if(strcmp(instruction, "JCA") == 0) return "19";
+    if(strcmp(instruction, "JCS") == 0) return "1A";
+    if(strcmp(instruction, "JNCA") == 0) return "1B";
+    if(strcmp(instruction, "JNCS") == 0) return "1C";
+    if(strcmp(instruction, "JEA") == 0) return "1D";
+    if(strcmp(instruction, "JES") == 0) return "1E";
+    if(strcmp(instruction, "JNEA") == 0) return "1F";
+    if(strcmp(instruction, "JNES") == 0) return "20";
     return NULL;
 }

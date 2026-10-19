@@ -22,6 +22,7 @@ wire [7:0] acc_data_out;
 reg [1:0] acc_input_sel;
 wire z_flag; assign z_flag = ~|acc_data_out;
 
+
 //alu wires 
 reg [7:0] alu_input_a;
 reg [7:0] alu_input_b;
@@ -30,6 +31,12 @@ wire n_flag;
 wire alu_z_flag;
 wire carry_flag;
 wire [7:0] alu_output;
+
+//carry logic
+reg c_write;
+reg c_flag;
+
+
 
 
 //PC wires 
@@ -52,7 +59,7 @@ wire [15:0] rom_data_out;
 acc ACC ( acc_data_in , acc_write_enable , acc_enable_shift , acc_sel, clk , acc_data_out);
 alu ALU (alu_input_a , alu_input_b , alu_sel , alu_output  , carry_flag , n_flag , alu_z_flag );
 pc PC ( pc_offset , activate_jmp , pc_mode , pc_clr , clk , pc_address );
-ram RAM ( ram_enable , ram_address,  ram_data_in , ram_write_enable , ram_data_out, port1 , port2 , port3, port4);
+ram RAM ( ram_enable , ram_address,  ram_data_in , ram_write_enable, clk , ram_data_out, port1 , port2 , port3, port4);
 rom ROM ( pc_address , rom_data_out);
 
 //cpu outputs definitions 
@@ -77,7 +84,7 @@ always @(*) begin
     ram_data_in = 8'h00;
     ram_write_enable = 0;
     acc_input_sel = 0;
-    
+    c_write = 0;    
 
 if (enable) begin 
 
@@ -91,7 +98,7 @@ if (enable) begin
 	alu_sel = 4'h0;
 	acc_input_sel = 2'b00;
 	acc_write_enable = 1;
-	
+	c_write = 1;
         end
 //SUBI
 8'h02 : begin
@@ -100,7 +107,7 @@ if (enable) begin
         alu_sel = 4'h4;
         acc_input_sel = 2'b00;
         acc_write_enable = 1;
-
+	c_write = 1;
         end
 
 
@@ -111,7 +118,6 @@ if (enable) begin
         alu_sel = 4'h9;
         acc_input_sel = 2'b00;
         acc_write_enable = 1;
-
         end
 
 //XORI
@@ -180,7 +186,7 @@ if (enable) begin
         alu_sel = 4'h0;
         acc_input_sel = 2'b00;
         acc_write_enable = 1;
-
+	c_write = 1;
         end
 
 //SUBM
@@ -191,7 +197,7 @@ if (enable) begin
         alu_sel = 4'h4;
         acc_input_sel = 2'b00;
         acc_write_enable = 1;
-
+	c_write = 1;
         end
 
 //ANDM
@@ -290,25 +296,76 @@ end
 	if(~z_flag) begin activate_jmp = 1; pc_mode = 1; end 
 	else begin end 
 	end  
-default : begin end
-	  
 
+//JCA
+8'h19: begin 
+	if(c_flag) begin activate_jmp = 1; pc_mode = 0; end
+	end
+
+//JCS
+8'h1A: begin 
+	if(c_flag) begin activate_jmp = 1; pc_mode = 1; end
+	end
+
+//JNCA
+8'h1B : begin 
+	if(~c_flag) begin activate_jmp = 1; pc_mode = 0; end
+	end
+
+//JNCS
+8'h1C : begin 
+	if(~c_flag) begin activate_jmp = 1; pc_mode = 1; end
+	end
+
+//JEA
+8'h1D : begin 
+	ram_address = 8'h00;
+	if(acc_data_out == ram_data_out) begin activate_jmp = 1; pc_mode = 0; end
+	end
+
+//JES
+8'h1E :begin 
+	ram_address = 8'h00;
+	if(acc_data_out == ram_data_out) begin activate_jmp = 1; pc_mode = 1; end
+	end
+
+//JNEA
+8'h1F : begin 
+	ram_address = 8'h00;
+	if(acc_data_out != ram_data_out) begin activate_jmp = 1; pc_mode = 0; end
+	end
+
+//JNES
+8'h20 : begin
+        ram_address = 8'h00;
+        if(acc_data_out != ram_data_out) begin activate_jmp = 1; pc_mode = 1; end
+        end
+
+default : begin end
 	endcase
 end 
 
 end
  
-always @(*) begin
 
+//acc input selection
+always @(*) begin
     case (acc_input_sel)
 
         2'b00: acc_data_in = alu_output;
         2'b01: acc_data_in = ram_data_out;
         2'b10: acc_data_in = rom_data_out[7:0];
         default: acc_data_in = 8'h00;
-
     endcase
-
 end
+
+//carry flag logic 
+always @(posedge clk) begin 
+
+if(pc_clr) c_flag <= 1'b0;
+else if(c_write) c_flag <= carry_flag;
+
+end 
+
 
 endmodule 

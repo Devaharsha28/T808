@@ -3,6 +3,7 @@ module ram(
  input [7:0] address,
  input [7:0] data ,
  input write_enable,
+ input clk,
 
  output [7:0] data_out,
  output [7:0] port1,
@@ -22,10 +23,11 @@ assign port4 = registers[255];
 assign data_out = (enable) ? registers[address] : 8'h00;
 
 
-always @(posedge write_enable) begin 
+always @(posedge clk) begin 
 
-registers[address] <= data;
-
+if(write_enable) begin 
+    registers[address] <= data;
+end
 
 end
 

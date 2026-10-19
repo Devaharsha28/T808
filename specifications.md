@@ -66,6 +66,14 @@ These ports are direct extensions from the ram addresses and can be modifed by m
 | `16` | `MVA addr` | `ACC = RAM[addr]` |
 | `17` | `JNZA offset` | Jump ahead if `ACC != 0` |
 | `18` | `JNZS offset` | Jump back if `ACC != 0` |
+| `19` | `JCA offset`  |Jump ahead if `carry = 1`|
+| `1A` | `JCS offset`  |Jump back if  `carry = 1`|
+| `1B` | `JNCA offset` |Jump ahead if `carry = 0`|
+| `1C` | `JNCS offset` |Jump back if `carry = 0`|
+| `1D` | `JEA offset`  |Jump ahead if ` ACC == RAM[00]`|
+| `1E` | `JES offset`  |Jump back if  ` ACC == RAM[00]`|
+| `1F` | `JNEA offset` |Jump ahead if ` ACC != RAM[00]`|
+| `20` | `JNES offset` |Jump back if ` ACC != RAM[00]`|
 
 ## Jumps
 
@@ -80,6 +88,19 @@ JZS x    -> PC - x if ACC == 0
 
 JNZA x   -> PC + x if ACC != 0
 JNZS x   -> PC - x if ACC != 0
+
+JCA x    -> PC + x if carry = 1
+JCS x    -> PC - x if carry = 1
+
+JNCA x    -> PC + x if carry = 0
+JNCS x    -> PC - x if carry = 0
+
+JEA x    -> PC + x if values of accumulator and ram address 00 are same 
+JES x    -> PC - x if values of accumulator and ram address 00 are same 
+
+JNEA x    -> PC + x if values of accumulator and ram address 00 not are same
+JNES x    -> PC - x if values of accumulator and ram address 00 not are same
+
 ```
 
 ## Shift / Rotate

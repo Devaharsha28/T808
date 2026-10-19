@@ -36,11 +36,7 @@ void Vcpu___024root___eval_triggers__act(Vcpu___024root* vlSelf) {
     // Body
     vlSelfRef.__VactTriggered.set(0U, ((IData)(vlSelfRef.clk) 
                                        & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__clk__0))));
-    vlSelfRef.__VactTriggered.set(1U, ((IData)(vlSelfRef.cpu__DOT__ram_write_enable) 
-                                       & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__cpu__DOT__ram_write_enable__0))));
     vlSelfRef.__Vtrigprevexpr___TOP__clk__0 = vlSelfRef.clk;
-    vlSelfRef.__Vtrigprevexpr___TOP__cpu__DOT__ram_write_enable__0 
-        = vlSelfRef.cpu__DOT__ram_write_enable;
 #ifdef VL_DEBUG
     if (VL_UNLIKELY(vlSymsp->_vm_contextp__->debug())) {
         Vcpu___024root___dump_triggers__act(vlSelf);
