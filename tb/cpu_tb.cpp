@@ -8,7 +8,7 @@
 void print_state (uint8_t acc , uint8_t pc , uint16_t rom , uint8_t port1 , uint8_t port2 , uint8_t port3, uint8_t port4 ){
 
 
-printf(" | acc = %02X| pc = %02X | inst =%04X | \n | p1 = %02X | p2 = %02X | p3 = %02X | p4 = %02X |\n"
+printf(" | acc = %02X| pc = %04X | inst =%04X | \n | p1 = %02X | p2 = %02X   | p3 = %02X | p4 = %02X |\n"
 	, (unsigned)acc , (unsigned)pc , (unsigned)rom , (unsigned)port1, (unsigned)port2, (unsigned)port3, (unsigned)port4 );
 printf("_______________________________________________\n");
 

@@ -18,7 +18,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vcpu___024root final : public VerilatedModule
     VL_IN8(enable,0,0);
     VL_IN8(pc_clr,0,0);
     VL_OUT8(accumulator,7,0);
-    VL_OUT8(program_counter,7,0);
     VL_OUT8(port1,7,0);
     VL_OUT8(port2,7,0);
     VL_OUT8(port3,7,0);
@@ -36,16 +35,17 @@ class alignas(VL_CACHE_LINE_BYTES) Vcpu___024root final : public VerilatedModule
     CData/*7:0*/ cpu__DOT__ram_data_in;
     CData/*0:0*/ cpu__DOT__ram_write_enable;
     CData/*7:0*/ cpu__DOT__ACC__DOT__register;
-    CData/*7:0*/ cpu__DOT__PC__DOT__state;
     CData/*0:0*/ __VstlFirstIteration;
     CData/*0:0*/ __VicoFirstIteration;
     CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
     CData/*0:0*/ __VactContinue;
+    VL_OUT16(program_counter,15,0);
     VL_OUT16(rom_output,15,0);
     SData/*15:0*/ cpu__DOT__rom_data_out;
+    SData/*15:0*/ cpu__DOT__PC__DOT__state;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<CData/*7:0*/, 256> cpu__DOT__RAM__DOT__registers;
-    VlUnpacked<SData/*15:0*/, 256> cpu__DOT__ROM__DOT__read_only_mem;
+    VlUnpacked<SData/*15:0*/, 65536> cpu__DOT__ROM__DOT__read_only_mem;
     std::string cpu__DOT__ROM__DOT__rom_file;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VicoTriggered;

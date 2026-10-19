@@ -578,16 +578,20 @@ VL_INLINE_OPT void Vcpu___024root___nba_sequent__TOP__0(Vcpu___024root* vlSelf) 
         vlSelfRef.cpu__DOT__PC__DOT__state = 0U;
         vlSelfRef.cpu__DOT__c_flag = 0U;
     } else {
-        vlSelfRef.cpu__DOT__PC__DOT__state = (0xffU 
+        vlSelfRef.cpu__DOT__PC__DOT__state = (0xffffU 
                                               & ((IData)(vlSelfRef.cpu__DOT__activate_jmp)
                                                   ? 
                                                  ((IData)(vlSelfRef.cpu__DOT__pc_mode)
                                                    ? 
                                                   ((IData)(vlSelfRef.cpu__DOT__PC__DOT__state) 
-                                                   - (IData)(vlSelfRef.cpu__DOT__rom_data_out))
+                                                   - 
+                                                   (0xffU 
+                                                    & (IData)(vlSelfRef.cpu__DOT__rom_data_out)))
                                                    : 
                                                   ((IData)(vlSelfRef.cpu__DOT__PC__DOT__state) 
-                                                   + (IData)(vlSelfRef.cpu__DOT__rom_data_out)))
+                                                   + 
+                                                   (0xffU 
+                                                    & (IData)(vlSelfRef.cpu__DOT__rom_data_out))))
                                                   : 
                                                  ((IData)(1U) 
                                                   + (IData)(vlSelfRef.cpu__DOT__PC__DOT__state))));

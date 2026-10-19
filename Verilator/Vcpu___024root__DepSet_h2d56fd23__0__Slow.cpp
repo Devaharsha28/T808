@@ -39,7 +39,7 @@ VL_ATTR_COLD void Vcpu___024root___eval_initial__TOP(Vcpu___024root* vlSelf) {
         VL_FINISH_MT("rtl/rom.v", 14, "");
     }
     VL_WRITEF_NX("loading rom: %@\n",0,-1,&(vlSelfRef.cpu__DOT__ROM__DOT__rom_file));
-    VL_READMEM_N(true, 16, 256, 0, VL_CVT_PACK_STR_NN(vlSelfRef.cpu__DOT__ROM__DOT__rom_file)
+    VL_READMEM_N(true, 16, 65536, 0, VL_CVT_PACK_STR_NN(vlSelfRef.cpu__DOT__ROM__DOT__rom_file)
                  ,  &(vlSelfRef.cpu__DOT__ROM__DOT__read_only_mem)
                  , 0, ~0ULL);
 }
@@ -648,7 +648,7 @@ VL_ATTR_COLD void Vcpu___024root___ctor_var_reset(Vcpu___024root* vlSelf) {
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->pc_clr = VL_RAND_RESET_I(1);
     vlSelf->accumulator = VL_RAND_RESET_I(8);
-    vlSelf->program_counter = VL_RAND_RESET_I(8);
+    vlSelf->program_counter = VL_RAND_RESET_I(16);
     vlSelf->rom_output = VL_RAND_RESET_I(16);
     vlSelf->port1 = VL_RAND_RESET_I(8);
     vlSelf->port2 = VL_RAND_RESET_I(8);
@@ -668,11 +668,11 @@ VL_ATTR_COLD void Vcpu___024root___ctor_var_reset(Vcpu___024root* vlSelf) {
     vlSelf->cpu__DOT__ram_write_enable = VL_RAND_RESET_I(1);
     vlSelf->cpu__DOT__rom_data_out = VL_RAND_RESET_I(16);
     vlSelf->cpu__DOT__ACC__DOT__register = VL_RAND_RESET_I(8);
-    vlSelf->cpu__DOT__PC__DOT__state = VL_RAND_RESET_I(8);
+    vlSelf->cpu__DOT__PC__DOT__state = VL_RAND_RESET_I(16);
     for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
         vlSelf->cpu__DOT__RAM__DOT__registers[__Vi0] = VL_RAND_RESET_I(8);
     }
-    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 65536; ++__Vi0) {
         vlSelf->cpu__DOT__ROM__DOT__read_only_mem[__Vi0] = VL_RAND_RESET_I(16);
     }
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);

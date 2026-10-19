@@ -1,0 +1,35 @@
+;A => 80
+MVI FF
+MOV 80
+
+;B => 81
+MVI 02
+MOV 81
+
+;add
+MVA 80
+ADDM 81
+MOV 82
+
+;83 <= 1
+MVI 00
+MOV 83
+
+;carry logic
+JNC NO_CARRY
+MVI 01
+MOV 83
+
+.label NO_CARRY
+
+; FC <= 82
+MVA 82
+MOV FC
+
+;FD <= 83
+MVA 83
+MOV FD
+
+
+.label DONE
+JMP DONE

@@ -6,33 +6,33 @@ input mode,
 input clr,
 input clk,
 
-output [7:0] address
+output [15:0] address
 );
 
 
-reg [7:0] state;
+reg [15:0] state;
 
 
-initial begin state = 8'h00 ; end 
+initial begin state = 16'h00 ; end 
 
 assign address = state;
 
 always @(posedge clk) begin 
 
-if (clr) begin   state <= 8'h00; end 
+if (clr) begin   state <= 16'h0000; end 
 
 else begin 
 
 if (activate_jmp) begin 
 
-if (mode) begin state <= state - offset; end 
-else begin state <= state + offset; end 
+if (mode) begin state <= state - {8'h00, offset}; end 
+else begin state <= state + {8'h00, offset}; end 
 
 end
 
 else begin 
 
-state <= state + 8'h01;
+state <= state + 16'h0001;
 
 
 end 

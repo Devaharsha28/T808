@@ -5,7 +5,7 @@ input pc_clr,
 
 
 output [7:0] accumulator,
-output [7:0] program_counter,
+output [15:0] program_counter,
 output [15:0] rom_output,
 output [7:0] port1,
 output [7:0] port2,
@@ -43,7 +43,7 @@ reg c_flag;
 reg [7:0] pc_offset;
 reg activate_jmp;
 reg pc_mode;
-wire [7:0] pc_address;
+wire [15:0] pc_address;
 
 //RAM wires 
 wire ram_enable; assign ram_enable = 1;

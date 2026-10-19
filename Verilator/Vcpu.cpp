@@ -13,11 +13,11 @@ Vcpu::Vcpu(VerilatedContext* _vcontextp__, const char* _vcname__)
     , enable{vlSymsp->TOP.enable}
     , pc_clr{vlSymsp->TOP.pc_clr}
     , accumulator{vlSymsp->TOP.accumulator}
-    , program_counter{vlSymsp->TOP.program_counter}
     , port1{vlSymsp->TOP.port1}
     , port2{vlSymsp->TOP.port2}
     , port3{vlSymsp->TOP.port3}
     , port4{vlSymsp->TOP.port4}
+    , program_counter{vlSymsp->TOP.program_counter}
     , rom_output{vlSymsp->TOP.rom_output}
     , rootp{&(vlSymsp->TOP)}
 {

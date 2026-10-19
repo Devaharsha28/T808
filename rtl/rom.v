@@ -1,9 +1,9 @@
 module rom(
-input [7:0] address,
+input [15:0] address,
 output [15:0] data_out
 );
 
-reg [15:0] read_only_mem [0:255];
+reg [15:0] read_only_mem [0:65535];
 
 string rom_file;
 
