@@ -9,8 +9,8 @@ output [15:0] program_counter,
 output [15:0] rom_output,
 output [7:0] port1,
 output [7:0] port2,
-output [7:0] port3,
-output [7:0] port4
+input [7:0] port3,
+input [7:0] port4
 );
 
 //Accumulator wires 

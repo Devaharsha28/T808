@@ -36,7 +36,8 @@ int running = 1;
 
 cpu.pc_clr = 0;
 cpu.enable =1;
-
+cpu.port3 = 0x12;
+cpu.port4 = 0x34;
 
 while (running){
 

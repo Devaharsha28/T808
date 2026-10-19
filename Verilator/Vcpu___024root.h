@@ -20,8 +20,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vcpu___024root final : public VerilatedModule
     VL_OUT8(accumulator,7,0);
     VL_OUT8(port1,7,0);
     VL_OUT8(port2,7,0);
-    VL_OUT8(port3,7,0);
-    VL_OUT8(port4,7,0);
+    VL_IN8(port3,7,0);
+    VL_IN8(port4,7,0);
     CData/*7:0*/ cpu__DOT__acc_data_in;
     CData/*0:0*/ cpu__DOT__acc_write_enable;
     CData/*0:0*/ cpu__DOT__acc_enable_shift;

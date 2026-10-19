@@ -138,10 +138,6 @@ VL_ATTR_COLD void Vcpu___024root___stl_sequent__TOP__0(Vcpu___024root* vlSelf) {
         [0xfcU];
     vlSelfRef.port2 = vlSelfRef.cpu__DOT__RAM__DOT__registers
         [0xfdU];
-    vlSelfRef.port3 = vlSelfRef.cpu__DOT__RAM__DOT__registers
-        [0xfeU];
-    vlSelfRef.port4 = vlSelfRef.cpu__DOT__RAM__DOT__registers
-        [0xffU];
     vlSelfRef.rom_output = vlSelfRef.cpu__DOT__ROM__DOT__read_only_mem
         [vlSelfRef.cpu__DOT__PC__DOT__state];
     vlSelfRef.cpu__DOT__rom_data_out = vlSelfRef.cpu__DOT__ROM__DOT__read_only_mem
@@ -351,8 +347,12 @@ VL_ATTR_COLD void Vcpu___024root___stl_sequent__TOP__0(Vcpu___024root* vlSelf) {
             }
         }
     }
-    cpu__DOT__ram_data_out = vlSelfRef.cpu__DOT__RAM__DOT__registers
-        [vlSelfRef.cpu__DOT__ram_address];
+    cpu__DOT__ram_data_out = ((0xfeU == (IData)(vlSelfRef.cpu__DOT__ram_address))
+                               ? (IData)(vlSelfRef.port3)
+                               : ((0xffU == (IData)(vlSelfRef.cpu__DOT__ram_address))
+                                   ? (IData)(vlSelfRef.port4)
+                                   : vlSelfRef.cpu__DOT__RAM__DOT__registers
+                                  [vlSelfRef.cpu__DOT__ram_address]));
     vlSelfRef.cpu__DOT__pc_mode = 0U;
     vlSelfRef.cpu__DOT__activate_jmp = 0U;
     cpu__DOT__alu_input_b = 0U;

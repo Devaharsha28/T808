@@ -34,8 +34,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vcpu VL_NOT_FINAL : public VerilatedModel {
     VL_OUT8(&accumulator,7,0);
     VL_OUT8(&port1,7,0);
     VL_OUT8(&port2,7,0);
-    VL_OUT8(&port3,7,0);
-    VL_OUT8(&port4,7,0);
+    VL_IN8(&port3,7,0);
+    VL_IN8(&port4,7,0);
     VL_OUT16(&program_counter,15,0);
     VL_OUT16(&rom_output,15,0);
 
