@@ -305,8 +305,7 @@ VL_ATTR_COLD void Vcpu___024root___stl_sequent__TOP__0(Vcpu___024root* vlSelf) {
                                   >> 0xcU)))) {
                         if ((1U & (~ ((IData)(vlSelfRef.cpu__DOT__rom_data_out) 
                                       >> 0xbU)))) {
-                            if ((1U & (~ ((IData)(vlSelfRef.cpu__DOT__rom_data_out) 
-                                          >> 0xaU)))) {
+                            if ((0x400U & (IData)(vlSelfRef.cpu__DOT__rom_data_out))) {
                                 if ((1U & (~ ((IData)(vlSelfRef.cpu__DOT__rom_data_out) 
                                               >> 9U)))) {
                                     if ((1U & (~ ((IData)(vlSelfRef.cpu__DOT__rom_data_out) 
@@ -314,6 +313,8 @@ VL_ATTR_COLD void Vcpu___024root___stl_sequent__TOP__0(Vcpu___024root* vlSelf) {
                                         vlSelfRef.cpu__DOT__ram_address = 0U;
                                     }
                                 }
+                            } else {
+                                vlSelfRef.cpu__DOT__ram_address = 0U;
                             }
                         }
                     }
@@ -366,19 +367,40 @@ VL_ATTR_COLD void Vcpu___024root___stl_sequent__TOP__0(Vcpu___024root* vlSelf) {
                                   >> 0xcU)))) {
                         if ((1U & (~ ((IData)(vlSelfRef.cpu__DOT__rom_data_out) 
                                       >> 0xbU)))) {
-                            if ((1U & (~ ((IData)(vlSelfRef.cpu__DOT__rom_data_out) 
-                                          >> 0xaU)))) {
+                            if ((0x400U & (IData)(vlSelfRef.cpu__DOT__rom_data_out))) {
                                 if ((1U & (~ ((IData)(vlSelfRef.cpu__DOT__rom_data_out) 
                                               >> 9U)))) {
                                     if ((1U & (~ ((IData)(vlSelfRef.cpu__DOT__rom_data_out) 
                                                   >> 8U)))) {
                                         if (((IData)(vlSelfRef.cpu__DOT__ACC__DOT__register) 
-                                             != (IData)(cpu__DOT__ram_data_out))) {
+                                             < (IData)(cpu__DOT__ram_data_out))) {
                                             vlSelfRef.cpu__DOT__pc_mode = 1U;
                                             vlSelfRef.cpu__DOT__activate_jmp = 1U;
                                         }
                                     }
                                 }
+                            } else if ((0x200U & (IData)(vlSelfRef.cpu__DOT__rom_data_out))) {
+                                if ((0x100U & (IData)(vlSelfRef.cpu__DOT__rom_data_out))) {
+                                    if (((IData)(vlSelfRef.cpu__DOT__ACC__DOT__register) 
+                                         < (IData)(cpu__DOT__ram_data_out))) {
+                                        vlSelfRef.cpu__DOT__pc_mode = 0U;
+                                        vlSelfRef.cpu__DOT__activate_jmp = 1U;
+                                    }
+                                } else if (((IData)(vlSelfRef.cpu__DOT__ACC__DOT__register) 
+                                            > (IData)(cpu__DOT__ram_data_out))) {
+                                    vlSelfRef.cpu__DOT__pc_mode = 1U;
+                                    vlSelfRef.cpu__DOT__activate_jmp = 1U;
+                                }
+                            } else if ((0x100U & (IData)(vlSelfRef.cpu__DOT__rom_data_out))) {
+                                if (((IData)(vlSelfRef.cpu__DOT__ACC__DOT__register) 
+                                     > (IData)(cpu__DOT__ram_data_out))) {
+                                    vlSelfRef.cpu__DOT__pc_mode = 0U;
+                                    vlSelfRef.cpu__DOT__activate_jmp = 1U;
+                                }
+                            } else if (((IData)(vlSelfRef.cpu__DOT__ACC__DOT__register) 
+                                        != (IData)(cpu__DOT__ram_data_out))) {
+                                vlSelfRef.cpu__DOT__pc_mode = 1U;
+                                vlSelfRef.cpu__DOT__activate_jmp = 1U;
                             }
                         }
                     }

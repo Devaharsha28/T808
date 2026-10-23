@@ -74,6 +74,14 @@ These ports are direct extensions from the ram addresses and can be modifed by m
 | `1E` | `JES offset`  |Jump back if  ` ACC == RAM[00]`|
 | `1F` | `JNEA offset` |Jump ahead if ` ACC != RAM[00]`|
 | `20` | `JNES offset` |Jump back if ` ACC != RAM[00]`|
+|`21` | `JGA offset` | Jump ahead if `ACC > RAM[00]`|
+|`22` | `JGS offset` | Jump back if `ACC > RAM[00]`|
+|`23` | `JSA offset` | Jump ahead if `ACC < RAM[00]`|
+|`24` | `JSS offset` | Jump back if `ACC < RAM[00]`|
+
+
+
+
 
 ## Jumps
 
@@ -101,6 +109,11 @@ JES x    -> PC - x if values of accumulator and ram address 00 are same
 JNEA x    -> PC + x if values of accumulator and ram address 00 not are same
 JNES x    -> PC - x if values of accumulator and ram address 00 not are same
 
+JGA x	  -> PC + x if value of accumulator is greater than ram address 00
+JGS x     -> PC - x if value of accumulator is greater than ram address 00
+
+JSA x	  ->PC + x if values of accumulator is lesser than ram address 00
+JSS x	  ->PC - x if values of accumulator is lesser than ram address 00
 ```
 
 ## Shift / Rotate
@@ -143,4 +156,4 @@ MVA 80
 - No carry/borrow branch instructions.
 - Conditional jumps currently check ACC for zero/non-zero.
 - Arithmetic wraps at 8 bits.
-- Opcodes `19`–`FF` are unused.
+- Opcodes `25`–`FF` are unused.

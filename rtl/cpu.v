@@ -36,9 +36,6 @@ wire [7:0] alu_output;
 reg c_write;
 reg c_flag;
 
-
-
-
 //PC wires 
 reg [7:0] pc_offset;
 reg activate_jmp;
@@ -340,6 +337,28 @@ end
         ram_address = 8'h00;
         if(acc_data_out != ram_data_out) begin activate_jmp = 1; pc_mode = 1; end
         end
+//JGA
+8'h21 : begin 
+	ram_address = 8'h00;
+	if(acc_data_out > ram_data_out) begin activate_jmp =1 ; pc_mode=0; end
+	end
+//JGS
+8'h22 : begin 
+	ram_address = 8'h00;
+	if(acc_data_out > ram_data_out) begin activate_jmp = 1; pc_mode = 1; end
+	end
+//JSA
+8'h23 : begin 
+	ram_address = 8'h00;
+	if(acc_data_out < ram_data_out) begin activate_jmp = 1; pc_mode = 0; end
+	end
+//JSS
+8'h24 : begin
+	ram_address = 8'h00;
+	if(acc_data_out < ram_data_out) begin activate_jmp = 1; pc_mode = 1; end
+	end
+
+
 
 default : begin end
 	endcase

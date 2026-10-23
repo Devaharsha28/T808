@@ -101,8 +101,10 @@ int main(int argc , char* args[]){
         if(strcmp(opcode, ".label") == 0) continue;
 
         // Jump instruction conversion block
-        if(strcmp(opcode, "JMP") == 0 || strcmp(opcode, "JZ") == 0 || strcmp(opcode, "JNZ")  == 0|| strcmp(opcode, "JC") == 0
-           || strcmp(opcode, "JNC") == 0 || strcmp(opcode, "JE") == 0 || strcmp(opcode, "JNE") == 0){
+        if(strcmp(opcode, "JMP") == 0 || strcmp(opcode, "JZ") == 0 || strcmp(opcode, "JNZ")  == 0||
+            strcmp(opcode, "JC") == 0
+           || strcmp(opcode, "JNC") == 0 || strcmp(opcode, "JE") == 0 || 
+           strcmp(opcode, "JNE") == 0 || strcmp(opcode, "JG") == 0 || strcmp(opcode , "JS") == 0){
             int found = 0;
             for(int i = 0; i < label_count; i++){
                 if(strcmp(operand, labels[i].name) == 0){
@@ -118,6 +120,8 @@ int main(int argc , char* args[]){
 			else if(strcmp(opcode, "JNC") == 0) strcpy(opcode , "JNCA");
 			else if(strcmp(opcode, "JE") == 0) strcpy(opcode , "JEA");
                         else if(strcmp(opcode, "JNE") == 0) strcpy(opcode , "JNEA");
+			else if(strcmp(opcode, "JG") == 0) strcpy(opcode, "JGA");
+			else if(strcmp(opcode ,"JS") == 0) strcpy(opcode, "JSA");
 			}
                     else { // Backward jump or same address
                         offset = address - labels[i].address;
@@ -128,7 +132,8 @@ int main(int argc , char* args[]){
                         else if(strcmp(opcode, "JNC") == 0) strcpy(opcode , "JNCS");
                         else if(strcmp(opcode, "JE") == 0) strcpy(opcode , "JES");
                         else if(strcmp(opcode, "JNE") == 0) strcpy(opcode , "JNES");
-
+			else if(strcmp(opcode, "JG") == 0) strcpy(opcode, "JGS");
+			else if (strcmp(opcode, "JS") ==0) strcpy(opcode, "JSS");
 			}
 
                     if(offset > 255){
@@ -196,5 +201,9 @@ char* opcode_hex(char* instruction){
     if(strcmp(instruction, "JES") == 0) return "1E";
     if(strcmp(instruction, "JNEA") == 0) return "1F";
     if(strcmp(instruction, "JNES") == 0) return "20";
+    if(strcmp(instruction, "JGA") == 0) return "21";
+    if(strcmp(instruction, "JGS") == 0) return "22";
+    if(strcmp(instruction, "JSA") == 0) return "23";
+    if(strcmp(instruction, "JSS") == 0) return "24";
     return NULL;
 }
