@@ -423,3 +423,6 @@ PC=86  INST=0700
 ```
 
 result: **working**
+
+
+!!! this was made to check the earlier versions of t808  , now with more conditional branching instructions this is further simple !!!
