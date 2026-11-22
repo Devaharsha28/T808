@@ -38,7 +38,6 @@ VL_ATTR_COLD void Vcpu___024root___eval_initial__TOP(Vcpu___024root* vlSelf) {
         VL_WRITEF_NX("bro give rom file with +ROM=whatever.hex\n",0);
         VL_FINISH_MT("rtl/rom.v", 14, "");
     }
-    VL_WRITEF_NX("loading rom: %@\n",0,-1,&(vlSelfRef.cpu__DOT__ROM__DOT__rom_file));
     VL_READMEM_N(true, 16, 65536, 0, VL_CVT_PACK_STR_NN(vlSelfRef.cpu__DOT__ROM__DOT__rom_file)
                  ,  &(vlSelfRef.cpu__DOT__ROM__DOT__read_only_mem)
                  , 0, ~0ULL);

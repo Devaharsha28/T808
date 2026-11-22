@@ -14,7 +14,7 @@ if (!$value$plusargs("ROM=%s", rom_file)) begin
     $finish;
 end
 
-$display("loading rom: %s", rom_file);
+//$display("loading rom: %s", rom_file);
 
 $readmemh(rom_file, read_only_mem);
 
