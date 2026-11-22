@@ -51,7 +51,9 @@ while (running){
 
 cpu.clk = 0;
 cpu.eval();
-printf("port1: %c\n", print_char(cpu.port1));
+printf("port1(0xfc): %c\n", print_char(cpu.port1));
+printf("port1(0xfd): %c\n", print_char(cpu.port2));
+
 cpu.clk = 1;
 //print_state(cpu.accumulator , cpu.program_counter , cpu.rom_output,  cpu.port1 , cpu.port2 , cpu.port3, cpu.port4 );
 

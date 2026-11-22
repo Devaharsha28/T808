@@ -72,8 +72,13 @@ Verilator_files/Vcpu
 and can be run using
 
 ```bash
-./Verilator_files/Vcpu
+./Verilator_files/Vcpu +ROM=<whatever.hex> +DELAY=<value_in_ms>
 ```
+
++ROM argument can take even text files , but to keep clean i'm using .hex
+the hex file should contain instructions in hex ,
+DELAY argument is optional and u can even skip it 
+but i am still a human and cant read 50 lines a second , so i change it according to situation 
 
 the C++ testbench generates the clock and calls `eval()` whenever the cpu inputs change.
 

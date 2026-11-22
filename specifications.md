@@ -28,13 +28,13 @@ T808 is an 8-bit accumulator-based Harvard CPU.
 The operand can be an immediate value, RAM address, or jump offset depending on the instruction.
 
 ## Ports
-These ports are direct extensions from the ram addresses and can be modifed by mov instruction js like any other memory address .
-|Port | RAM address|
-| --- | --- |
-| port 1 | 0xfc |
-| port 2 | 0xfd |
-| port 3 | 0xfe |
-| port 4 | 0xff |
+These ports are direct extensions from the ram addresses and can be modifed by mov instruction js like any other memory address , except port 3 and 4 cuz they are modified by external forces of magic
+|Port | RAM address| I/O |
+| --- | --- | --- |
+| port 1 | 0xfc | output |
+| port 2 | 0xfd | output |
+| port 3 | 0xfe | input |
+| port 4 | 0xff | input |
 
 
 ## ISA
@@ -82,78 +82,23 @@ These ports are direct extensions from the ram addresses and can be modifed by m
 
 
 
+## assembler 
 
-## Jumps
+u can write all instructions same in text file with .asm and run assembler c code in assembler folder
 
-Jumps are relative to the current PC.
+but for jump instruction , u dont need to specify A or S at end , and u dont even need to specify offset 
 
-```text
-JMPA x   -> PC + x
-JMPS x   -> PC - x
+the syntax will be : ``` JMP <label name> ```
+u can use any variant of jumps in place of JMP
 
-JZA x    -> PC + x if ACC == 0
-JZS x    -> PC - x if ACC == 0
+u will need to define labels using syntax : ``` .label label_name```
 
-JNZA x   -> PC + x if ACC != 0
-JNZS x   -> PC - x if ACC != 0
 
-JCA x    -> PC + x if carry = 1
-JCS x    -> PC - x if carry = 1
 
-JNCA x    -> PC + x if carry = 0
-JNCS x    -> PC - x if carry = 0
-
-JEA x    -> PC + x if values of accumulator and ram address 00 are same 
-JES x    -> PC - x if values of accumulator and ram address 00 are same 
-
-JNEA x    -> PC + x if values of accumulator and ram address 00 not are same
-JNES x    -> PC - x if values of accumulator and ram address 00 not are same
-
-JGA x	  -> PC + x if value of accumulator is greater than ram address 00
-JGS x     -> PC - x if value of accumulator is greater than ram address 00
-
-JSA x	  ->PC + x if values of accumulator is lesser than ram address 00
-JSS x	  ->PC - x if values of accumulator is lesser than ram address 00
-```
-
-## Shift / Rotate
-
-```text
-RR   abcdefgh -> habcdefg
-RL   abcdefgh -> bcdefgha
-
-SHR  abcdefgh -> 0abcdefg
-SHL  abcdefgh -> bcdefgh0
-```
-
-## Memory
-
-```text
-Program ROM : 256 x 16-bit
-Data RAM    : 256 x 8-bit
-```
-
-`MOV` writes ACC to RAM.
-
-```asm
-MVI 05
-MOV 80
-```
-
-```text
-RAM[80] = 05
-```
-
-`MVA` reads RAM into ACC.
-
-```asm
-MVA 80
-```
 
 ## Notes
 
 - No general-purpose registers; operations are accumulator based.
-- No carry/borrow branch instructions.
 - Conditional jumps currently check ACC for zero/non-zero.
 - Arithmetic wraps at 8 bits.
 - Opcodes `25`–`FF` are unused.
